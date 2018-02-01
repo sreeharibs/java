@@ -1,0 +1,77 @@
+Load and execute
+	- Class Loader
+	- Execution engine
+
+Class loader
+	- JVM classes
+	- Application classes
+	- Loaded classes are bytecode instructions and fed to Execution engine 
+	- Loaded into memory area
+
+Execution engine
+	- Uses native method calls to talk to Host OS
+
+Runtime Memory area
+	- Method area
+	- Heap
+	- Stack
+	- PC Register
+	- Native Method Stack
+
+Class Loading
+	- Load, Link and initialize
+	- Load
+		- Bootstrap CL - JVM libraries in rt.jar
+		- Extension CL - JVM extenstions - /jre/lib/ext
+		- Application / System CL - Classpath (-cp)
+		- Loading by hierarchy (parent first)
+		- ClassNotFound
+	- Link
+		- Verify - bytecode with the jvm specification
+		- Prepare - memory allocated to statics - class vars to default value
+		- Resolve 
+			- sybolic references are resolved - to other classes or constant pool 
+			- ClassDefNotFoundException
+	- Initialize
+		- class vars to values initialized in code; static blocks are executed
+
+Memory area
+	- Method area (also called PermGen space)
+		- class data - metadata for classes
+			- Reflection gets data from method area
+			- constant pool
+			- byte code, static variables
+		- Default 64MB
+		- -XX:MaxPermSize (OutOfMemoryError:PermGenSpace)
+		- Java 8 - metaspace - removed permgenspace and moved to native memory with no limits
+	- Heap
+		- Object Data (instance variable, arrays)
+		- -Xms, -Xmx (1/4th of system memory default)
+		- OutOfMemoryError
+		- Young Gen (Eden + Survivor Space 1 and 2), Old Memory
+	- PC Register
+		- Has pointer to next instruction for each thread
+		- 
+	- Java Stack
+		- Stack Frame for each method in each thread
+		- Xss (typically 1MB for linux 64bit)
+		- StackOverFlowError
+		- parameters, local variables, return value
+		- cannot see each others data (on other thread) - thread safe 
+		- while heap and method area are not thread safe
+	- Native method stack
+		- a thread executing native method will create a stack in this area
+		
+Execution Engine
+	-Interpreter
+		- interprets bytecode and executes it
+		- uses JNI to execute native libraries (jre bin folder)
+	- JIT Compiler
+		- code which executes frequently is no more interpreted; it is complied and ket ready for execution
+		- does this on hotspots
+	- Hotspot Profiler
+		- identifies hotspots
+	- GC
+
+
+
